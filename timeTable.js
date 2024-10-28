@@ -2,7 +2,7 @@ const Sunday =[
     {   
         time: 'Sunday',
         roomNumber: 'Holiday',
-        subject: 'all classes',
+        subject: 'No classes for the day',
         type: ''
     }
 ]
