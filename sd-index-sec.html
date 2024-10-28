@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="shortcut icon" href="./assets/header1.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="sd-style.css">
+</head>
+<body>
+    <header>
+        <div class="logo" title="University Management System">
+            <img src="./assets/header.png" alt="">
+            <h2>CVR <span class="danger"></span>Hyderabad</h2>
+        </div>
+        <div class="navbar">
+            <a href="sd-index-sec.html" class="active">
+                <span class="material-icons-sharp">home</span>
+                <h3>Home</h3>
+            </a>
+            <a href="sd-timetable-sec.html" onclick="timeTableAll()">
+                <span class="material-icons-sharp">today</span>
+                <h3>Time Table</h3>
+            </a> 
+            <a href="sd-exam-sec.html">
+                <span class="material-icons-sharp">grid_view</span>
+                <h3>Examination</h3>
+            </a>
+            <a href="sd-password-sec.html">
+                <span class="material-icons-sharp">password</span>
+                <h3>Change Password</h3>
+            </a>
+            <a href="index.html">
+                <span class="material-icons-sharp">logout</span>
+                <h3>Logout</h3>
+            </a>
+        </div>
+        <div id="profile-btn">
+            <span class="material-icons-sharp">person</span>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+        </div>
+        
+    </header>
+    <div class="container">
+        <aside>
+            <div class="profile">
+                <div class="top">
+                    <div class="profile-photo">
+                        <img src="./assets/profile-5.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p>Student</p>
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+                <div class="about">
+                    <h5>Course</h5>
+                    <p>BTech. Computer Science & Engineering</p>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <h1>Test</h1>
+            <div class="subjects">
+                <div class="eg">
+                    <h3>Click below</h3>
+                    <a href="quiz.html" class="button-46" role="button">Start Test</a>
+                </div>
+            </div>
+
+        </main>
+
+        <div class="right">
+            <div class="announcements">
+                <h2>Announcements</h2>
+                <div class="updates">
+                    <div class="message">
+                        <p>
+                            <br>
+                            1. B.Tech IV Year I Semester (R18: 2021 Batch) II Mid Examinations<br>
+                            <br>
+                            2.B.Tech III Year I Semester Minor Regular (R22: 2022 Batch) and Supplementary (R18: 2020 & 2021 Batches) Examinations Notification <br>
+                            <br>
+                            3.M.Tech II Year I Semester (R22: 2023 Batch) I Mid Examinations <br>
+                            <br>
+                            4. B.Tech IV Year I Semester Regular (R18:2021 Batch) and IV/I & III/II Supplementary (R18 & R15: 2015 to 2021 Batches) Examinations Notification <br>
+                            <br>
+                            5. Placement Test & Training Test - 22 Batch <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="timeTable.js"></script>
+    <script src="sd-app.js"></script>
+</body>
+</html>

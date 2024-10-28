@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Attendance</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    .present, .absent {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .present.active {
+      background-color: green;
+    }
+    .absent.active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Attendance</h1>
+  <div id="add-student">
+    <input type="text" id="student-name" placeholder="Enter student name">
+    <button id="add-student-btn">Add Student</button>
+  </div>
+  <ul id="student-list">
+    <!-- Students will be added here dynamically using JavaScript -->
+  </ul>
+  <div>
+    <p>Present: <span id="present-count">0</span></p>
+    <p>Absent: <span id="absent-count">0</span></p>
+  </div>
+  <a id="download-link" style="display: none;" download="attendance.csv">Download Attendance</a>
+
+  <script>
+    const studentList = document.getElementById("student-list");
+    const presentCountElement = document.getElementById("present-count");
+    const absentCountElement = document.getElementById("absent-count");
+    const downloadLink = document.getElementById("download-link");
+    const addStudentBtn = document.getElementById("add-student-btn");
+    const studentNameInput = document.getElementById("student-name");
+
+    let presentCount = 0;
+    let absentCount = 0;
+    
+
+    function updateCounts() {
+      presentCountElement.textContent = presentCount;
+      absentCountElement.textContent = absentCount;
+    }
+
+    function toggleAttendance(button, isPresent) {
+      if (button.classList.contains("active")) {
+        button.classList.remove("active");
+        isPresent ? presentCount-- : absentCount--;
+      } else {
+        button.classList.add("active");
+        isPresent ? presentCount++ : absentCount++;
+      }
+      updateCounts();
+    }
+
+    function createStudentElement(studentName) {
+      const li = document.createElement("li");
+      const buttonPresent = document.createElement("div");
+      buttonPresent.className = "present";
+      buttonPresent.textContent = "Present";
+      buttonPresent.addEventListener("click", () => {
+        toggleAttendance(buttonPresent, true);
+      });
+
+      const buttonAbsent = document.createElement("div");
+      buttonAbsent.className = "absent";
+      buttonAbsent.textContent = "Absent";
+      buttonAbsent.addEventListener("click", () => {
+        toggleAttendance(buttonAbsent, false);
+      });
+
+      li.textContent = studentName;
+      li.appendChild(buttonPresent);
+      li.appendChild(buttonAbsent);
+      studentList.appendChild(li);
+    }
+
+    addStudentBtn.addEventListener("click", () => {
+      const studentName = studentNameInput.value.trim();
+      if (studentName) {
+        createStudentElement(studentName);
+        studentNameInput.value = "";
+      }
+    });
+
+    // Function to export attendance data as CSV
+    function exportAttendance() {
+      const students = Array.from(studentList.querySelectorAll("li")).map(studentElement => studentElement.textContent);
+      const attendanceData = students.map(student => ({
+        Student: student,
+        Attendance: presentCount > 0 ? "Present" : "Absent",
+      }));
+
+      const csv = [
+        Object.keys(attendanceData[0]).join(","),
+        ...attendanceData.map(student => Object.values(student).join(",")),
+      ].join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+
+      downloadLink.href = url;
+      downloadLink.style.display = "block";
+    }
+
+    // Event listener to export attendance data
+    downloadLink.addEventListener("click", exportAttendance);
+  </script>
+</body>
+</html>

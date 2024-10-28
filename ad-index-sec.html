@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="shortcut icon" href="./assets/header.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="ad-style.css">
+</head>
+<body>
+    <header>
+        <div class="logo" title="University Management System">
+            <img src="./assets/header.png" alt="">
+            <h2>CVR <span class="danger"></span>Hyderabad</h2>
+        </div>
+        <div class="navbar">
+            <a href="ad-index-sec.html" class="active">
+                <span class="material-icons-sharp">home</span>
+                <h3>Home</h3>
+            </a>
+            <a href="ad-timetable-sec.html" onclick="timeTableAll()">
+                <span class="material-icons-sharp">today</span>
+                <h3>Time Table</h3>
+            </a> 
+            <a href="ad-exam-sec.html">
+                <span class="material-icons-sharp">grid_view</span>
+                <h3>Examination</h3>
+            </a>
+            <a href="ad-password-sec.html">
+                <span class="material-icons-sharp">password</span>
+                <h3>Change Password</h3>
+            </a>
+            <a href="index.html">
+                <span class="material-icons-sharp">logout</span>
+                <h3>Logout</h3>
+            </a>
+        </div>
+        <div id="profile-btn">
+            <span class="material-icons-sharp">person</span>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+        </div>
+        
+    </header>
+    <div class="container">
+        <aside>
+            <div class="profile">
+                <div class="top">
+                    <div class="profile-photo">
+                        <img src="./assets/profile-5.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p>Admin</p>
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+                <div class="about">
+                    <h5>For Course</h5>
+                    <p>BTech. Computer Science & Engineering</p>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <h1>Student Attendence</h1>
+            <div class="subjects">
+               
+  <style>
+
+
+    #student-name {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #404040;
+    border-bottom: 2px solid #404040;
+    font-size: 16px;
+    border-radius: 5px;
+    }
+
+    #add-student-btn {
+    background-color: #747474;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+
+    display: flex;
+    flex-direction: row; /* By default, it's set to 'row', but you can change it if needed */
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    #add-student-btn:hover {
+    background-color: #a6a6a6;
+    }
+
+    #student-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0; /* Added margin for spacing */
+    }
+
+    #student-list li {
+    background-color: #fff;
+    border: 1px solid #828282;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: 100%; /* Extend to the last available width */
+    }
+
+    #student-list li:hover {
+    transform: translateY(-5px);
+    }
+
+    #present-count, #absent-count {
+    font-weight: bold;
+    margin: 5px 10px 5px 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: px 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .present {
+    padding: 10px 10px;
+    margin: 1px;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    background-color: #838486;
+    color: #fff;
+    border-radius: 5px;
+    position: relative;
+    }
+
+    .absent {
+    padding: 10px 10px;
+    margin: 1px;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    background-color: #838486;
+    color: #fff;
+    border-radius: 5px;
+    }
+
+    .present.active, .absent.active {
+    background-color: #00771c;
+    border: 1px solid #000000;
+    }
+
+    .absent.active {
+    background-color: #ff0000;
+    border: 1px solid #000000;
+    }
+
+    .centered-buttons {
+    text-align: center;
+    }
+
+    .centered-buttons button {
+    margin: 0 10px;
+    padding: 4px 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    background-color: #060077;
+    color: #fff;
+    border-radius: 5px; /* Adjust the margin as needed for spacing between buttons */
+    }
+
+    
+  </style>
+</head>
+<body>
+
+  <div id="add-student">
+    <input type="text" id="student-name" placeholder="Enter student name">
+    <button id="add-student-btn">Add Student</button>
+
+  <ul id="student-list">
+    <!-- Students will be added here dynamically using JavaScript -->
+  </ul>
+    <p class="centered-buttons">
+        Present: <button id="present-count">0</button> Absent: <button id="absent-count">0</button>
+    </p>
+
+  </div>
+  <a id="download-link" style="display: none;" download="attendance.csv">Download Attendance</a>
+
+  <script>
+    const studentList = document.getElementById("student-list");
+    const presentCountElement = document.getElementById("present-count");
+    const absentCountElement = document.getElementById("absent-count");
+    const downloadLink = document.getElementById("download-link");
+    const addStudentBtn = document.getElementById("add-student-btn");
+    const studentNameInput = document.getElementById("student-name");
+
+    let presentCount = 0;
+    let absentCount = 0;
+    
+
+    function updateCounts() {
+      presentCountElement.textContent = presentCount;
+      absentCountElement.textContent = absentCount;
+    }
+
+    function toggleAttendance(button, isPresent) {
+      if (button.classList.contains("active")) {
+        button.classList.remove("active");
+        isPresent ? presentCount-- : absentCount--;
+      } else {
+        button.classList.add("active");
+        isPresent ? presentCount++ : absentCount++;
+      }
+      updateCounts();
+    }
+
+    function createStudentElement(studentName) {
+      const li = document.createElement("li");
+      const buttonPresent = document.createElement("div");
+      buttonPresent.className = "present";
+      buttonPresent.textContent = "Present";
+      buttonPresent.addEventListener("click", () => {
+        toggleAttendance(buttonPresent, true);
+      }); 
+
+      const buttonAbsent = document.createElement("div");
+      buttonAbsent.className = "absent";
+      buttonAbsent.textContent = "Absent";
+      buttonAbsent.addEventListener("click", () => {
+        toggleAttendance(buttonAbsent, false);
+      });
+
+      li.textContent = studentName;
+      li.appendChild(buttonPresent);
+      li.appendChild(buttonAbsent);
+      studentList.appendChild(li);
+    }
+
+    addStudentBtn.addEventListener("click", () => {
+      const studentName = studentNameInput.value.trim();
+      if (studentName) {
+        createStudentElement(studentName);
+        studentNameInput.value = "";
+      }
+    });
+
+  </script>
+
+        </main>
+
+        <div class="right">
+            <div class="announcements">
+                <h2>Announcements</h2>
+                <div class="updates">
+                    <div class="message">
+                        <p>
+                            <br>
+                            1. B.Tech IV Year I Semester (R18: 2021 Batch) II Mid Examinations<br>
+                            <br>
+                            2.B.Tech III Year I Semester Minor Regular (R22: 2022 Batch) and Supplementary (R18: 2020 & 2021 Batches) Examinations Notification <br>
+                            <br>
+                            3.M.Tech II Year I Semester (R22: 2023 Batch) I Mid Examinations <br>
+                            <br>
+                            4. B.Tech IV Year I Semester Regular (R18:2021 Batch) and IV/I & III/II Supplementary (R18 & R15: 2015 to 2021 Batches) Examinations Notification <br>
+                            <br>
+                            5. Placement Test & Training Test - 22 Batch <br>
+    
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="timeTable.js"></script>
+    <script src="ad-app.js"></script>
+</body>
+</html>

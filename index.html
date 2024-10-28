@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    
+    <link rel="stylesheet" href="styles.css" />
+    <title>Welcome to the Examination portal of CVR College</title>
+    <link rel="shortcut icon" href="./assets/header.png">
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <div class="nav__bar">
+
+
+          <div class="nav__header">
+          <!-- <div class="nav__logo">
+              <img src="C:\Users\1602b\Downloads\CVR-ExaminationPortal\CVR-Examination-portal-main\assets\CVR_Log.png" alt="logo" />
+            </div> --> 
+            <div class="nav__menu__btn" id="menu-btn">
+              <span><i class="ri-menu-3-line"></i></span>
+            </div>
+          </div>
+
+          <ul class="nav__links" id="nav-links">
+            <li class="link"><a href="#home">Home</a></li>
+            <li class="link"><a href="#about">Upcoming</a></li>
+            <li class="link"><a href="#Papers">Papers</a></li>
+
+            <li class="link"><a href="#Leaderboard">Help</a></li>
+            <li class="link"><a href="#service"></a>---------></li>
+            <li class="link btn"><a href="Login.html">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="section__container header__container" id="home">
+        <div class="header__image">
+          <img src="assets/header.png" alt="header" />
+        </div>
+        <div class="header__content">
+          <h4>CVR COLLEGE OF ENGINEERING</h4>
+          <h1>EXAMINATION PORTAL</h1>
+          <p>
+            A dedicated Examination portal for students of CVR College of Engineering.Students can attempt quiz,know their Schedule
+            get past year question papers,enquire over help desk.<br>
+            <br>
+            Faculties make use of this portal to update quiz & materials and mark student attendance.
+          </p>
+          <br>
+          <br>
+          <br>
+          <a href="Login.html" class=""><button class="btn">Login</button></a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section__container about__container" id="about">
+      <div class="about__image">
+        <img src="assets/ue.png" alt="about" />
+      </div>
+      <div class="about__content">
+        <h2 class="section__header">UPCOMING EXAM</h2>
+        <p>
+          <br>
+          1. Mid-1 Examination - '23 Batch [Feb 10th] <br>
+          <br>
+          2.  Mid-2 Examination - '22 Batch [Feb 22nd]  <br>
+          <br>
+          3.  Practicals - '22 Batch [Feb 26th]  <br>
+          <br>
+          4. Semester End Examination - '24 Batch [March 24th] <br>
+        </p>
+       
+      </div>
+    </section>
+
+    <section class="section__container Papers__container" id="Papers">
+      <div class="Papers__header">
+        <h2 class="section__header">Our Papers</h2>
+        <div class="Papers__nav">
+          <button
+            class="btn Papers__btn mixitup-control-active"
+            data-filter="all"
+          >
+            All
+          </button>
+          <button class="btn Papers__btn" data-filter=".web">Mid Term</button>
+          <button class="btn Papers__btn" data-filter=".game">End Term</button>
+          <button class="btn Papers__btn" data-filter=".design">
+            Practicals
+          </button>
+        </div>
+      </div>
+
+      <div class="Papers__grid">
+        <div class="Papers__card mix web">
+          <a href="assets/paper.pdf" download>
+            <img src="assets/Mid-1.png" alt="Papers" />
+          </a>
+        </div>
+
+
+        <div class="Papers__card mix game">
+          <a href="assets/paper.pdf" download>
+            <img src="assets/End-1.png" alt="Papers" />
+          </a>
+        </div>
+
+
+        <div class="Papers__card mix design">
+          <a href="assets/paper.pdf" download>
+            <img src="assets/P-1.png" alt="Papers" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container Leaderboard__container" id="Leaderboard">
+      <h2 class="section__header">Help Desk</h2>
+      <p class="section__subheader">Any queries immediately contact them</p>
+
+      <!-- Slider main container -->
+      <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <div class="Leaderboard__card">
+              <img src="assets/R-1.png" alt="Leaderboard" />
+              <div>
+                <h4>Saathvik Myneni<span>CSE Department </span></h4>
+                <p>
+                  Student Coordinator <br>
+                  Email: 7vik1928@gmail.com <br>
+                  Phone: 98221XXXXX  <br>
+                </p>
+
+                <div class="Leaderboard__ratings">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="swiper-slide">
+            <div class="Leaderboard__card">
+              <img src="assets/R-1.png" alt="Leaderboard" />
+              <div>
+                <h4>Shiva Shakti Sumukh <span>ECE Department</span></h4>
+                <p>
+                  Student Coordinator<br>
+                  Email: Subbu123@gmail.com <br>
+                  Phone: 73423XXXXX <br> 
+                </p>
+
+                <div class="Leaderboard__ratings">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="swiper-slide">
+            <div class="Leaderboard__card">
+              <img src="assets/R-1.png" alt="Leaderboard" />
+              <div>
+                <h4>Varun Chowdary <span>EEE Department</span></h4>
+                <p>
+                  Student Coordinator <br>
+                  Email: chowchow2624@gmail.com <br>
+                  Phone: 69420XXXXX <br>
+                </p>
+
+                <div class="Leaderboard__ratings">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="swiper-slide">
+            <div class="Leaderboard__card">
+              <img src="assets/R-1.png" alt="Leaderboard" />
+              <div>
+                <h4>Mr.Nayani Sateesh  <span>Assistant Professor</span></h4>
+                <p>
+                  Project Head <br>
+                  Email: ns1923@gmail.com <br>
+                  Phone: 98227XXXXX <br>
+                </p>
+
+                <div class="Leaderboard__ratings">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <h5><a href="#">CVR COLLEGE OF ENGINEERING</a></h5>
+          <p> 
+            CVR College of Engineering has been granted autonomous status by the UGC. CVR has set a record by getting this status in the shortest time (less than 12.5 years since the establishment) among 300+ colleges in the entire Telangana (Osmania University) area. 
+          </p>
+    <!--      
+          <div class="footer__socials">
+            <a href="#"><i class="ri-mail-fill"></i></a>
+            <a href="#"><i class="ri-github-fill"></i></a>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <a href="#"><i class="ri-dribbble-line"></i></a>
+          </div>
+     -->
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+  
+  </body>
+</html>
