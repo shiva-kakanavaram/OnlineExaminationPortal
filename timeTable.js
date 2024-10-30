@@ -2,7 +2,7 @@ const Sunday =[
     {   
         time: 'Sunday',
         roomNumber: 'Holiday',
-        subject: 'No classes for the day',
+        subject: 'No Class Scheduled',
         type: ''
     }
 ]
@@ -15,103 +15,115 @@ const Monday =[
     },
     {   
         time: '10:00 AM - 11:00 AM',
-        roomNumber: '304CM',
+        roomNumber: '312CM',
         subject: 'ADSJ',
         type: 'Tutorial'
     },
     {   
         time: '11:10 AM - 1:10 PM',
         roomNumber: '304CM',
-        subject: 'DWDM',
+        subject: 'Linux',
         type: 'Theory'
     },
     {   
         time: '2:00 PM - 3:40 PM',
-        roomNumber: '110 Old cellar lab',
-        subject: 'DWDM',
+        roomNumber: '001 Cellar Lab',
+        subject: 'Data Mining',
         type: 'Lab'
     }
 ]
 const Tuesday =[
     {   
-        time: '9:00 AM',
-        roomNumber: '27-304Y',
-        subject: 'MTH166',
+        time: '9:00 AM - 11:00 AM',
+        roomNumber: '312CM',
+        subject: 'Linux',
         type: 'Tutorial'
     },
     {   
-        time: '11-12 AM',
-        roomNumber: '28-107',
-        subject: 'CS849',
+        time: '11:10 PM - 12:10 PM',
+        roomNumber: '304CM',
+        subject: 'ADSJ',
         type: 'Lecture'
     },
     {   
-        time: '12-01 PM',
-        roomNumber: '28-107',
-        subject: 'CS849',
+        time: '12:10 PM - 01:10 PM',
+        roomNumber: '304CM',
+        subject: 'DBMS',
         type: 'Lecture'
     },
     {   
-        time: '02-03 PM',
-        roomNumber: '38-718',
-        subject: 'NS200',
+        time: '02:00 PM - 03:00 PM',
+        roomNumber: '304CM',
+        subject: 'Data Mining',
         type: 'Lecture'
     }
 ]
 
 const Wednesday =[
     {   
-        time: '10-11 AM',
-        roomNumber: '33-309',
-        subject: 'DBMS130',
+        time: '10:00 -11:00 AM',
+        roomNumber: '304CM',
+        subject: 'DBMS',
         type: 'Lecture'
     },
     {   
-        time: '11-12 AM',
-        roomNumber: '38-719',
-        subject: 'CS200',
+        time: '11:00 AM-12:00 PM',
+        roomNumber: '306CM',
+        subject: 'Social Pyschology',
         type: 'Lecture'
+    },
+    {   
+        time: '2:00 PM - 3:40 PM',
+        roomNumber: '204 CB Lab',
+        subject: 'Linux',
+        type: 'Lab'
     }
 ]
 
 const Thursday =[
     {   
-        time: '11-12 AM',
-        roomNumber: '33-309',
-        subject: 'MTH166',
+        time: '10:00 AM - 11:00 AM',
+        roomNumber: 'Library',
+        subject: 'Libary',
+        type: 'Research'
+    },
+    {   
+        time: '11:10 AM - 12:10 PM',
+        roomNumber: '304CM',
+        subject: 'Data Mining',
         type: 'Lecture'
     },
     {   
-        time: '01-02 PM',
-        roomNumber: '38-719',
-        subject: 'CS849',
+        time: '01:00 AM - 02:00 PM',
+        roomNumber: '304CM',
+        subject: 'Linux',
         type: 'Lecture'
     },
     {   
-        time: '02-03 PM',
-        roomNumber: '38-718',
-        subject: 'NS200',
+        time: '02:00 PM - 03:00 PM',
+        roomNumber: '304CM',
+        subject: 'ADSJ',
         type: 'Lecture'
     }
 ]
 
 const Friday =[
     {   
-        time: '10-11 AM',
-        roomNumber: '33-309',
-        subject: 'MEC103',
+        time: '10:00 AM - 11:00 AM',
+        roomNumber: '304CM',
+        subject: 'Linux',
         type: 'Lecture'
     },
     {   
-        time: '11-12 AM',
-        roomNumber: '33-309',
-        subject: 'MEC103',
+        time: '11:10 AM - 12:10 PM',
+        roomNumber: '306CM',
+        subject: 'Social Pyschology',
         type: 'Lecture'
     },
     {   
-        time: '02-03 PM',
-        roomNumber: '33-601',
-        subject: 'CS849',
+        time: '02:00 PM - 03:00 PM',
+        roomNumber: '312CM',
+        subject: 'Data Mining',
         type: 'Tutorial'
     },
 
@@ -119,21 +131,15 @@ const Friday =[
 
 const Saturday =[
     {   
-        time: '09-10 AM',
-        roomNumber: '34-604',
-        subject: 'DBMS130',
+        time: '09:00 AM - 10:00 PM',
+        roomNumber: '312CM',
+        subject: 'DBMS',
         type: 'Tutorial'
     },
     {   
-        time: '10-11 AM',
-        roomNumber: '34-604',
-        subject: 'DBMS130',
-        type: 'Lecture'
-    },
-    {   
-        time: '01-02 PM',
-        roomNumber: '33-309',
-        subject: 'MTH166',
+        time: '10:00 AM - 11:00 AM',
+        roomNumber: '304CM',
+        subject: 'Linux',
         type: 'Lecture'
     }
 ]
