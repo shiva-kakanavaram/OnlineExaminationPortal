@@ -1,109 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="student-styles.css" />
     <title>Student Login - CVR </title>
     <link rel="shortcut icon" href="./assets/header.png">
-  </head>
-  <body>
+</head>
+<body>
     <div class="container" id="container">
-      <div class="form__container signup__container">
-        <form>
-          <h1>Create Account</h1>
-          <div class="socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-google-fill"></i></a>
-            <a href="#"><i class="ri-linkedin-fill"></i></a>
-          </div>
-          <span>or use your email for registration</span>
-          <div class="form__group">
-            <input type="text" placeholder="Name" />
-          </div>
-          <div class="form__group">
-            <input type="email" placeholder="Email" />
-          </div>
-          <div class="form__group">
-            <input type="password" placeholder="Password" />
-          </div>
-          <button>SIGN UP</button>
-        </form>
-      </div>
-      <div class="form__container signin__container">
-        <form>
-          <h1>Sign in</h1>
-          <div class="socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-google-fill"></i></a>
-            <a href="#"><i class="ri-linkedin-fill"></i></a>
-          </div>
-          <span>or use your account</span>
-          <div class="form__group">
-            <input type="email" placeholder="Email" />
-          </div>
-          <div class="form__group">
-            <input type="password" placeholder="Password" />
-          </div>
-          <a href="#" class="forgot__password">Forgot your password?</a>
-          <button>SIGN IN</button>
-        </form>
-      </div>
-      <div class="overlay__container" id="overlayContainer">
-        <div class="overlay__wrapper">
-          <div class="overlay__panel overlay__panel__left">
-            <h1>Welcome Back!</h1>
-            <p>
-              To keep connected with us please login with your personal info
-            </p>
-            <button>SIGN IN</button>
-          </div>
-          <div class="overlay__panel overlay__panel__right">
-            <h1>Student</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <button>SIGN UP</button>
-          </div>
+        <div class="form__container signup__container">
+            <form id="signupForm">
+                <h1>Create Account</h1>
+                <div class="socials">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-google-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <div class="form__group">
+                    <input type="text" id="signupName" placeholder="Name" required />
+                </div>
+                <div class="form__group">
+                    <input type="email" id="signupEmail" placeholder="Email" required />
+                </div>
+                <div class="form__group">
+                    <input type="password" id="signupPassword" placeholder="Password" required />
+                </div>
+                <button type="submit">SIGN UP</button>
+            </form>
         </div>
-        <button id="overlayBtn"></button>
-      </div>
+        <div class="form__container signin__container">
+            <form id="loginForm">
+                <h1>Sign in</h1>
+                <div class="socials">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-google-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                </div>
+                <span>or use your account</span>
+                <div class="form__group">
+                    <input type="email" id="loginEmail" placeholder="Email" required />
+                </div>
+                <div class="form__group">
+                    <input type="password" id="loginPassword" placeholder="Password" required />
+                </div>
+                <a href="#" class="forgot__password">Forgot your password?</a>
+                <button type="submit">SIGN IN</button>
+            </form>
+        </div>
+        <div class="overlay__container" id="overlayContainer">
+            <div class="overlay__wrapper">
+                <div class="overlay__panel overlay__panel__left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button>SIGN IN</button>
+                </div>
+                <div class="overlay__panel overlay__panel__right">
+                    <h1>Student</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button>SIGN UP</button>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
     </div>
 
     <script>
-      const signInButton = document.querySelector(".signin__container button");
-      const emailInput = document.querySelector(".signin__container input[type='email']");
-      const passwordInput = document.querySelector(".signin__container input[type='password']");
+        // Handle Sign In Form Submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
 
-      // Event listener for the Sign In button
-      signInButton.addEventListener("click", () => {
-        const email = emailInput.value.trim(); // Trim removes leading/trailing spaces
-        const password = passwordInput.value.trim();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
 
-        // Check if the login credentials are correct
-        if (email === "student" && password === "123") {
-          // Redirect to the desired page (replace 'redirected-page.html' with the actual URL)
-          window.location.href = "sd-index-sec.html";
-        } else {
-          alert("Incorrect email or password. Please try again.");
-        }
-      });
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
 
-      const container = document.getElementById("container");
-      const overlayBtn = document.getElementById("overlayBtn");
-
-      overlayBtn.addEventListener("click", () => {
-        container.classList.toggle("right__panel__active");
-
-        overlayBtn.classList.remove("scale__btn-animation");
-        window.requestAnimationFrame(() => {
-          overlayBtn.classList.add("scale__btn-animation");
+                if (response.ok) {
+                    alert(data.message); // Show success message
+                    window.location.href = "sd-index-sec.html"; // Redirect on success
+                } else {
+                    alert(data.message); // Show error message
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error logging in');
+            }
         });
-      });
+
+        // Handle Sign Up Form Submission
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:3000/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await response.json();
+                alert(data.message); // Show success/error message
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error signing up');
+            }
+        });
+
+        // Overlay Button Functionality
+        const container = document.getElementById("container");
+        const overlayBtn = document.getElementById("overlayBtn");
+
+        overlayBtn.addEventListener("click", () => {
+            container.classList.toggle("right__panel__active");
+            overlayBtn.classList.remove("scale__btn-animation");
+            window.requestAnimationFrame(() => {
+                overlayBtn.classList.add("scale__btn-animation");
+            });
+        });
     </script>
-  </body>
-</html>
-  </body>
+</body>
 </html>
