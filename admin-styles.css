@@ -127,7 +127,7 @@ input {
 }
 
 .overlay__wrapper {
-  background: url("assets/1.png");
+  background: url("assets/2.png");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -188,7 +188,7 @@ input {
   cursor: pointer;
   position: absolute;
   left: 50%;
-  top: 415px;
+  top: 533px;
   transform: translateX(-50%);
   width: 10rem;
   height: 3rem;
