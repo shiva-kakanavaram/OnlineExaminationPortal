@@ -1,28 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="shortcut icon" href="./assets/header.png">
-    <link rel="stylesheet" href="ad-style.css">
-
-    <style>
-        body{overflow: hidden;}
-        header{position: relative;}
-        .exam{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 80vh;
-            width: 80%;
-            margin: auto;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Exam</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+        <link rel="shortcut icon" href="./assets/header.png">
+        <link rel="stylesheet" href="ad-style.css">
+    
+        <style>
+            body {
+                overflow: hidden;
+            }
+    
+            .exam-create {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 80vh;
+                width: 100%;
+                margin: auto;
+            }
+    
+            .exam-create table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+    
+            .exam-create table td {
+                padding: 10px;
+            }
+    
+            .exam-create h2 {
+                margin-bottom: 20px;
+            }
+    
+            .exam-create input[type="text"],
+            .exam-create input[type="date"],
+            .exam-create input[type="number"],
+            .exam-create textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+    
+            .exam-create button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    
+            .exam-create button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    
 <body>
     <header>
         <div class="logo">
@@ -61,55 +102,75 @@
     </header>
 
     <main>
-        <div class="exam timetable">
-            <h2>Exam Available</h2>
-            <table>
-                <thead>
+        <div class="exam-create timetable">
+            <h2>Create Exam</h2>
+            <form id="createExamForm">
+                <table>
                     <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Subject</th>
-                        <th>Room no.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>13 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>CS200</td>
-                        <td>38-718</td>
+                        <td><label for="title">Exam Title:</label></td>
+                        <td><input type="text" id="title" name="title" required></td>
                     </tr>
                     <tr>
-                        <td>16 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>DBMS130</td>
-                        <td>38-718</td>
+                        <td><label for="date">Date:</label></td>
+                        <td><input type="date" id="date" name="date" required></td>
                     </tr>
                     <tr>
-                        <td>18 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>MTH166</td>
-                        <td>38-718</td>
+                        <td><label for="duration">Duration (in hours):</label></td>
+                        <td><input type="number" id="duration" name="duration" required></td>
                     </tr>
                     <tr>
-                        <td>20 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>NS200</td>
-                        <td>38-718</td>
+                        <td><label for="description">Description:</label></td>
+                        <td><textarea id="description" name="description"></textarea></td>
                     </tr>
                     <tr>
-                        <td>23 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>CS849</td>
-                        <td>38-718</td>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit">Create Exam</button>
+                        </td>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+            </form>
         </div>
+        
     </main>
-    </main>
+    <script>
+        document.getElementById('createExamForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            const title = document.getElementById('title').value;
+            const date = document.getElementById('date').value;
+            const duration = document.getElementById('duration').value;
+            const description = document.getElementById('description').value;
+    
+            fetch('http://localhost:3000/auth/admin/create-exam', { // Ensure this matches your API endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    date: date,
+                    duration: duration,
+                    description: description
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message); // Display success message
+                document.getElementById('createExamForm').reset(); // Reset the form
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error creating exam. Please try again.'); // Display error message
+            });
+        });
+    </script>
+    
 
 </body>
 
-<script src="ad-app.js"></script>
 </html>
