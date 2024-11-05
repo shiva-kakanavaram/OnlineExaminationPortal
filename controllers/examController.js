@@ -13,7 +13,6 @@ exports.createExam = (req, res) => {
     });
 };
 
-
 // Student fetches available exams
 exports.getExams = (req, res) => {
     const sql = 'SELECT * FROM exams';
@@ -28,16 +27,33 @@ exports.getExams = (req, res) => {
 
 // Student registers for an exam
 exports.registerExam = (req, res) => {
-    const { student_id, exam_id } = req.body;
-    console.log('Received student_id:', student_id, 'exam_id:', exam_id); // Log received data
+    console.log('Request Body:', req.body); // Log the incoming request body
+    const { exam_id, email } = req.body; // Destructure email and exam_id from the request body
 
-    const sql = 'INSERT INTO registrations (student_id, exam_id) VALUES (?, ?)';
-    db.query(sql, [student_id, exam_id], (err, result) => {
+    if (!email || !exam_id) {
+        return res.status(400).json({ message: 'Missing email or exam ID' });
+    }
+
+    // Check if the student is already registered for the exam
+    const checkRegistrationSql = 'SELECT * FROM registrations WHERE email = ? AND exam_id = ?';
+    db.query(checkRegistrationSql, [email, exam_id], (err, results) => {
         if (err) {
-            console.error('Database error:', err); // Log database error
-            return res.status(500).json({ message: 'Error registering for exam', error: err });
+            console.error('Database error during registration check:', err);
+            return res.status(500).json({ message: 'Error checking registration' });
         }
-        res.status(200).json({ message: 'Registered successfully' });
+
+        if (results.length > 0) {
+            return res.status(400).json({ message: 'This student is already registered for this exam.' });
+        }
+
+        // Now proceed to register the student for the exam
+        const sql = 'INSERT INTO registrations (email, exam_id) VALUES (?, ?)';
+        db.query(sql, [email, exam_id], (err) => {
+            if (err) {
+                console.error('Database error during registration:', err);
+                return res.status(500).json({ message: 'Error registering for exam', error: err });
+            }
+            res.status(200).json({ message: 'Registered successfully' });
+        });
     });
 };
-

@@ -121,26 +121,36 @@
                 .catch(error => console.error('Error fetching exams:', error));
         }
 
-        function registerExam(examId) {
-            const studentId = 1; // Replace with dynamic student ID if available
+        let studentId; // You should assign this when the student logs in, based on their ID in the database.
 
-            fetch('http://localhost:3000/auth/student/register-exam', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ student_id: studentId, exam_id: examId })
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to register');
-                return response.json();
-            })
-            .then(data => {
-                alert(data.message);
-                fetchExams(); // Refresh the exams list after registration
-            })
-            .catch(error => alert('Error registering for exam. Please try again.'));
-        }
+        function registerExam(examId) {
+    const email = localStorage.getItem('user_email'); // Store email in localStorage upon login
+
+    if (!email) {
+        alert("Email not found. Please log in again.");
+        return;
+    }
+
+    fetch('http://localhost:3000/auth/student/register-exam', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, exam_id: examId }) // Pass email instead of user_id
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Failed to register');
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message);
+        fetchExams(); // Refresh the exams list after registration
+    })
+    .catch(error => alert('Error registering for exam. Please try again.'));
+}
+
+
+
     </script>
 </body>
 
