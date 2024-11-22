@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="admin-styles.css" />
-    <title>Admin - CVR Hyderabad</title>
+    <title>Admin Login - CVR</title>
     <link rel="shortcut icon" href="./assets/header.png">
 </head>  
 <body>
@@ -68,9 +68,9 @@
     </div>
 
     <script>
-        // Handle Sign In Form Submission
+        // Handle Sign In Form Submission for Admin Side
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
 
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
@@ -84,10 +84,10 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert(data.message); // Show success message
-                    window.location.href = "ad-index-sec.html"; // Redirect on success
+                    alert(data.message);
+                    window.location.href = "ad-index-sec.html"; // Redirect on successful login
                 } else {
-                    alert(data.message); // Show error message
+                    alert(data.message);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -95,13 +95,18 @@
             }
         });
 
-        // Handle Sign Up Form Submission
+        // Handle Sign Up Form Submission for Admin Side
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault();
 
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value.trim();
+
+            if (!email.endsWith('@admin.com')) {
+        alert('You must use an admin email (ending with @admin.com) to register.');
+        return;
+    }
 
             try {
                 const response = await fetch('http://localhost:3000/auth/signup', {
@@ -110,7 +115,12 @@
                     body: JSON.stringify({ name, email, password })
                 });
                 const data = await response.json();
-                alert(data.message); // Show success/error message
+
+                if (response.ok) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error signing up');

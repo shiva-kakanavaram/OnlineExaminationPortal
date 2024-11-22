@@ -1,18 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
+    <title>Exams Registration</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="shortcut icon" href="./assets/header1.png">
+    <link rel="shortcut icon" href="./assets/header.png">
     <link rel="stylesheet" href="sd-style.css">
-
     <style>
-        body{overflow: hidden;}
-        header{position: relative;}
-        .exam{
+        body { overflow: hidden; }
+        header { position: relative; }
+        .exam {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -21,6 +21,50 @@
             width: 80%;
             margin: auto;
         }
+        .exam-list {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.exam-list th, 
+.exam-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Specific styling for the last row */
+.exam-list tr:last-child td {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+/* Ensure the first cell in the last row has a left border */
+.exam-list tr:last-child td:first-child {
+    border-left: 1px solid #ccc;
+}
+
+.register-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Header styling */
+.exam-list th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+}
+
+/* Hover effect */
+.exam-list tr:hover {
+    background-color: #f9f9f9;
+}
     </style>
 </head>
 <body>
@@ -61,55 +105,94 @@
     </header>
 
     <main>
-        <div class="exam timetable">
-            <h2>Exam Available</h2>
-            <table>
+        <div class="exam">
+            <h2>Available Exams</h2>
+            <br>
+            <table class="exam-list" id="examTable">
                 <thead>
                     <tr>
+                        <th>Title</th>
                         <th>Date</th>
-                        <th>Time</th>
-                        <th>Subject</th>
-                        <th>Room no.</th>
+                        <th>Duration</th>
+                        <th>Description</th>
+                        <th>Register</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>13 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>CS200</td>
-                        <td>38-718</td>
-                    </tr>
-                    <tr>
-                        <td>16 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>DBMS130</td>
-                        <td>38-718</td>
-                    </tr>
-                    <tr>
-                        <td>18 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>MTH166</td>
-                        <td>38-718</td>
-                    </tr>
-                    <tr>
-                        <td>20 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>NS200</td>
-                        <td>38-718</td>
-                    </tr>
-                    <tr>
-                        <td>23 May 2022</td>
-                        <td>09-12 AM</td>
-                        <td>CS849</td>
-                        <td>38-718</td>
-                    </tr>
+                <tbody id="examTableBody">
+                    <!-- Exam rows will be added here by JavaScript -->
                 </tbody>
             </table>
         </div>
     </main>
-    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchExams();
+        });
 
+        function formatDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = String(date.getDate()).padStart(2, '0');   // Ensure two digits
+    const month = String(date.getMonth() + 1).padStart(2, '0');   // Get month and ensure two digits
+    const year = String(date.getFullYear()).slice(-2);    // Get last two digits of the year
+    
+    return `${day}-${month}-${year}`;
+}
+
+
+        function fetchExams() {
+            fetch('http://localhost:3000/auth/student/exams') // Adjust endpoint if necessary
+                .then(response => response.json())
+                .then(exams => {
+                    const examTableBody = document.getElementById('examTableBody');
+                    examTableBody.innerHTML = ''; // Clear any existing rows
+                    exams.forEach(exam => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${exam.title}</td>
+                            <td>${formatDate(exam.date)}</td> 
+                            <td>${exam.duration} hours</td>
+                            <td>${exam.description}</td>
+                            <td><button class="register-btn" onclick="registerExam(${exam.id})">Register</button></td>
+                        `;
+                        examTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching exams:', error));
+        }
+
+        let studentId; // You should assign this when the student logs in, based on their ID in the database.
+
+        function registerExam(examId) {
+    const email = localStorage.getItem('user_email'); // Store email in localStorage upon login
+
+    if (!email) {
+        alert("Email not found. Please log in again.");
+        return;
+    }
+
+    fetch('http://localhost:3000/auth/student/register-exam', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, exam_id: examId }) // Pass email instead of user_id
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Failed to register');
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message);
+        fetchExams(); // Refresh the exams list after registration
+    })
+    .catch(error => alert('Error registering for exam. Please try again.'));
+}
+
+
+
+    </script>
 </body>
 
-<script src="sd-app.js"></script>
+
 </html>

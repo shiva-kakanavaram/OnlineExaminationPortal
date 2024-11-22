@@ -1,0 +1,7 @@
+Next changes : 
+
+Only student should be allowed to register as student and admin as admin respectively
+Student home mei mock exams list
+admin home side mei Registered students list
+timetable glitch 
+exam papers in home page of portal

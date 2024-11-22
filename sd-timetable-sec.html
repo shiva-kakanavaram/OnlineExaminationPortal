@@ -4,73 +4,107 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
+    <title>Timetable</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="shortcut icon" href="./assets/header1.png">
+    <link rel="shortcut icon" href="./assets/header.png">
     <link rel="stylesheet" href="sd-style.css">
 </head>
 <body>
-    <header>
-        <div class="logo" title="University Management System">
-            <img src="./assets/header.png" alt="">
-            <h2>CVR <span class="danger"></span>Hyderabad</h2>
-        </div>
-        <div class="navbar">
-            <a href="sd-index-sec.html" class="active">
-                <span class="material-icons-sharp">home</span>
-                <h3>Home</h3>
-            </a>
-            <a href="sd-timetable-sec.html" onclick="timeTableAll()">
-                <span class="material-icons-sharp">today</span>
-                <h3>Time Table</h3>
-            </a> 
-            <a href="sd-exam-sec.html">
-                <span class="material-icons-sharp">grid_view</span>
-                <h3>Examination</h3>
-            </a>
-            <a href="sd-password-sec.html">
-                <span class="material-icons-sharp">password</span>
-                <h3>Change Password</h3>
-            </a>
-            <a href="index.html">
-                <span class="material-icons-sharp">logout</span>
-                <h3>Logout</h3>
-            </a>
-        </div>
-        </div>
-        <div id="profile-btn" style="display: none;">
-            <span class="material-icons-sharp">person</span>
-        </div>
-        <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-        </div>
-        
-    </header>
+<header>
+    <div class="logo" title="University Management System">
+        <img src="./assets/header.png" alt="">
+        <h2>CVR <span class="danger"></span>Hyderabad</h2>
+    </div>
+    <div class="navbar">
+        <a href="sd-index-sec.html" id="homeLink" class="active"> 
+            <span class="material-icons-sharp">home</span>
+            <h3>Home</h3>
+        </a>
+        <a href="sd-timetable-sec.html" id="timetableLink"> 
+            <span class="material-icons-sharp">today</span>
+            <h3>Time Table</h3>
+        </a>
+        <a href="sd-exam-sec.html"> 
+            <span class="material-icons-sharp">grid_view</span>
+            <h3>Examination</h3>
+        </a>
+        <a href="sd-password-sec.html"> 
+            <span class="material-icons-sharp">password</span>
+            <h3>Change Password</h3>
+        </a>
+        <a href="index.html"> 
+            <span class="material-icons-sharp">logout</span>
+            <h3>Logout</h3>
+        </a>
+    </div>
+    <div class="theme-toggler" title="Toggle Theme">
+        <span class="material-icons-sharp active">light_mode</span>
+        <span class="material-icons-sharp">dark_mode</span>
+    </div>
+    
+</header>
 
-    <main style="margin: 0;">
-        <div class="timetable active" id="timetable">
-            <div>
-                <span id="prevDay">&lt;</span>
-                <h2>Today's Timetable</h2>
-                <span id="nextDay">&gt;</span>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Room No.</th>
-                        <th>Subject</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+<main style="margin: 0;">
+    <div class="timetable active" id="timetable">
+        <div>
+            <span id="prevDay">&lt;</span>
+            <h2>Today's Timetable</h2>
+            <span id="nextDay">&gt;</span>
         </div>
-    </main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Room No.</th>
+                    <th>Subject</th>
+                    <th>Type</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</main>
+
+
+<script>
+// Function to navigate to Timetable and update active tab
+function navigateToTimetable() {
+    // Remove active class from all links
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to Timetable link
+    document.getElementById('timetableLink').classList.add('active');
+
+    // Load the timetable data
+    timeTableAll();
+}
+
+// Handle page load to set active tab based on URL
+window.onload = function() {
+    const currentPage = window.location.pathname.split('/').pop(); // Get current page name
+    const tabs = document.querySelectorAll('.navbar a');
+
+    tabs.forEach(tab => {
+        if (tab.href.includes(currentPage)) {
+            tab.classList.add('active'); // Add active class to current tab
+            if (tab.id === 'timetableLink') {
+                timeTableAll(); // Load timetable data if on timetable page
+            }
+        } else {
+            tab.classList.remove('active'); // Ensure other tabs do not have it
+        }
+    });
+};
+</script>
+<!-- <script src="timeTable.js"></script>  -->
+
+
+
+<script src="sd-app.js"></script> 
+
 
 </body>
-
-<script src="timeTable.js"></script>
-<script src="sd-app.js"></script>
 </html>
