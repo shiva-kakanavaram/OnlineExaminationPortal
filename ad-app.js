@@ -1,8 +1,39 @@
 const sideMenu = document.querySelector("aside");
 const profileBtn = document.querySelector("#profile-btn");
-const themeToggler = document.querySelector(".theme-toggler");
+
 const nextDay = document.getElementById('nextDay');
 const prevDay = document.getElementById('prevDay');
+const themeToggler = document.querySelector(".theme-toggler");
+
+// Toggle theme function
+themeToggler.onclick = function() {
+    document.body.classList.toggle('dark-theme');
+    
+    // Update icon states based on the active theme
+    themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
+    themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
+
+    // Save the theme in localStorage for persistence across pages
+    const isDarkTheme = document.body.classList.contains('dark-theme');
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+}
+
+// Apply the saved theme on page load
+window.onload = function() {
+    setActiveLink();
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggler.querySelector('span:nth-child(2)').classList.add('active');
+        themeToggler.querySelector('span:nth-child(1)').classList.remove('active');
+    } else {
+        themeToggler.querySelector('span:nth-child(1)').classList.add('active');
+        themeToggler.querySelector('span:nth-child(2)').classList.remove('active');
+    }
+};
+
+// Existing code for timetable navigation and active link handling...
+
 
 
 profileBtn.onclick = function() {
@@ -51,6 +82,7 @@ let now = new Date();
 let today = now.getDay(); // Will return the present day in numerical value; 
 let day = today; //To prevent the today value from changing;
 
+
 function timeTableAll(){
     document.getElementById('timetable').classList.toggle('active');
     setData(today);
@@ -64,6 +96,29 @@ prevDay.onclick = function() {
     day>=1 ? day-- : day=6;    
     setData(day);
 }
+// Existing code ...
+
+// Function to set active link based on the current URL
+function setActiveLink() {
+    const links = document.querySelectorAll('.navbar a');
+    const currentUrl = window.location.href; // Get the current page URL
+
+    links.forEach(link => {
+        if (link.href === currentUrl) {
+            link.classList.add('active'); // Add active class if it matches
+        } else {
+            link.classList.remove('active'); // Remove active class if it doesn't match
+        }
+    });
+}
+
+// Call the function to set the active link on page load
+window.onload = function() {
+    setActiveLink();
+};
+
+// Existing code ...
+
 
 setData(day); //To set the data in the table on loading window.
 document.querySelector('.timetable div h2').innerHTML = "Today's Timetable"; //To prevent overwriting the heading on loading;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="admin-styles.css" />
-    <title>Admin - CVR Hyderabad</title>
+    <title>Admin Login - CVR</title>
     <link rel="shortcut icon" href="./assets/header.png">
 </head>  
 <body>
@@ -102,6 +102,11 @@
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value.trim();
+
+            if (!email.endsWith('@admin.com')) {
+        alert('You must use an admin email (ending with @admin.com) to register.');
+        return;
+    }
 
             try {
                 const response = await fetch('http://localhost:3000/auth/signup', {

@@ -356,18 +356,18 @@ main .timetable table {
     transition: all 300ms ease;
 }
 
+main table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-varient);
+}
+
 main .timetable span {
     display: none;
 }
 
 main .timetable table:hover {
     box-shadow: none;
-}
-
-main table tbody td {
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-varient);
 }
 
 main table tbody tr:last-child td {
@@ -568,4 +568,64 @@ main .timetable.active .closeBtn {
         min-width: 200px;
         padding: 14px 16px;
     }
+}
+.mock-test-list {
+    margin-top: 2rem;
+}
+
+.mock-test-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.mock-test-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 1.5rem; /* Add this line */
+}
+
+.mock-test-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mock-test-card.selected {
+    border: 2px solid #4CAF50;
+}
+
+.mock-test-card-header {
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mock-test-card-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.mock-test-card-content {
+    padding: 1rem;
+}
+
+.mock-test-card-action {
+    padding: 1rem;
+    border-top: 1px solid #f0f0f0;
+    text-align: right;
+}
+
+.start-test-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
 }

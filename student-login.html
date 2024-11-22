@@ -110,6 +110,12 @@
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value.trim();
 
+
+             if (!email.endsWith('@student.com')) {
+                 alert('You must use a student email (ending with @student.com) to register.');
+                 return;
+                 }
+
             try {
                 const response = await fetch('http://localhost:3000/auth/signup', {
                     method: 'POST',

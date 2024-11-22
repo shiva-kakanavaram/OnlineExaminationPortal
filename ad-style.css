@@ -356,18 +356,18 @@ main .timetable table {
     transition: all 300ms ease;
 }
 
+main table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-varient);
+}
+
 main .timetable span {
     display: none;
 }
 
 main .timetable table:hover {
     box-shadow: none;
-}
-
-main table tbody td {
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-varient);
 }
 
 main table tbody tr:last-child td {
@@ -444,30 +444,6 @@ main .timetable.active .closeBtn {
     gap: 1rem;
     line-height: 1.5;
     padding: .5rem 0;
-}
-
-/* styles.css */
-
-.ul {
-list-style-type: none;
-padding: 0;
-}
-.li {
-margin: 10px 0;
-display: flex;
-align-items: center;
-}
-.present, .absent {
-background-color: white;
-border: 1px solid #ccc;
-padding: 5px;
-cursor: pointer;
-}
-.present.active {
-background-color: green;
-}
-.absent.active {
-background-color: red;
 }
 
 
@@ -586,7 +562,6 @@ background-color: red;
     }
 }
 
-
 @media (min-width: 768px) {
     .button-46 {
         font-size: 20px;
@@ -594,3 +569,82 @@ background-color: red;
         padding: 14px 16px;
     }
 }
+
+header {
+    position: relative;
+    z-index: 100; /* Ensure it stays above the rest of the content */
+}
+
+/* Add margin to the body or container to ensure space below the navbar */
+body, .container {
+    margin-top: 0px; /* Adjust this value based on your navbar height */
+}
+
+/* Adjust the profile section so it doesn't overlap with the content */
+
+
+/* Ensure no global margins/padding mess with the content layout */
+* {
+    margin: 0;
+    padding: 0;
+}
+.exam-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    width: 80%; /* Adjust width to make it smaller */
+    max-width: 900px; /* Maximum width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style for the table */
+#exam-registration-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* Table headers */
+#exam-registration-table th {
+    padding: 12px;
+    background-color: #f4f4f4;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table rows */
+#exam-registration-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Table row hover effect */
+#exam-registration-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Optional: Add some spacing around the main container */
+.container {
+    padding: 0px;
+}
+
+.dashboard-info {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center; /* Center-align the entire content inside .dashboard-info */
+}
+
+.dashboard-info h2 {
+    text-align: center; /* Ensure the heading is centered above the table */
+    margin-bottom: 15px; /* Add space below the heading */
+}
+
+#exam-registration-table th,
+#exam-registration-table td {
+    text-align: center; /* Center-align both table headers and data */
+    padding: 10px;
+}
+

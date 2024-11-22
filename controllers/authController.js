@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const db = require('../db'); // Import the database connection from db.js
+const db = require('../db'); 
 
 // Signup function
 exports.signup = (req, res) => {
@@ -53,9 +53,6 @@ exports.signup = (req, res) => {
 };  
 
 
-
-
-// Login function
 // Login function
 exports.login = (req, res) => {
     const { email, password } = req.body;
@@ -81,8 +78,8 @@ exports.login = (req, res) => {
             if (isMatch) {
                 res.status(200).json({
                     message: 'Login successful',
-                    user_id: results[0].id, // Include user_id in the response
-                    role: results[0].role  // Include role for redirection
+                    user_id: results[0].id, 
+                    role: results[0].role  
                 });
             } else {
                 res.status(401).json({ message: 'Invalid email or password' });
