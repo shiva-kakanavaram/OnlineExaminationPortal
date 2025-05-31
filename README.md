@@ -1,7 +1,7 @@
 Effortless Examination Portal
 
 Streamline the examination process with our advanced portal, providing
-a seamless experience for students and administrators
+a seamless experience for students and administrators.
 
 The portal features both admin and student user roles with
 functionalities such as exam creation, registration, and management. Built with HTML, CSS,
